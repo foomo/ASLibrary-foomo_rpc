@@ -16,9 +16,9 @@ package org.foomo.zugspitze.services.core.rpc.events
 		// ~ Constructor
 		//-----------------------------------------------------------------------------------------
 
-		public function RPCTransportErrorEvent(type:String, text:String='', id:int=0)
+		public function RPCTransportErrorEvent(type:String, text:String='')
 		{
-			super(type, false, false, text, id);
+			super(type, false, false, text);
 		}
 
 		//-----------------------------------------------------------------------------------------
@@ -30,7 +30,7 @@ package org.foomo.zugspitze.services.core.rpc.events
 		 */
 		override public function clone():Event
 		{
-			return new RPCTransportErrorEvent(this.type, this.text, this.errorID);
+			return new RPCTransportErrorEvent(this.type, this.text);
 		}
 
 		/**

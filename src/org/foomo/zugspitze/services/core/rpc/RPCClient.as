@@ -215,13 +215,13 @@ package org.foomo.zugspitze.services.core.rpc
 
 			switch (event.type) {
 				case IOErrorEvent.IO_ERROR:
-					this.dispatchEvent(new RPCClientErrorEvent(RPCClientErrorEvent.IO_ERROR, transport, event['text'], event['errorID']));
+					this.dispatchEvent(new RPCClientErrorEvent(RPCClientErrorEvent.IO_ERROR, transport, event['text']));
 					break;
 				case SecurityErrorEvent.SECURITY_ERROR:
-					this.dispatchEvent(new RPCClientErrorEvent(RPCClientErrorEvent.SECURITY_ERROR, transport, event['text'], event['errorID']));
+					this.dispatchEvent(new RPCClientErrorEvent(RPCClientErrorEvent.SECURITY_ERROR, transport, event['text']));
 					break;
 				default:
-					this.dispatchEvent(new RPCClientErrorEvent(RPCClientErrorEvent.RPC_TRANSPORT_ERROR, transport, event['text'], event['errorID']));
+					this.dispatchEvent(new RPCClientErrorEvent(RPCClientErrorEvent.RPC_TRANSPORT_ERROR, transport, event['text']));
 					break;
 			}
 		}
