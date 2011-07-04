@@ -14,12 +14,10 @@
  * You should have received a copy of the GNU Lesser General Public License along with
  * the foomo Opensource Framework. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.foomo.zugspitze.services.core.rpc.events
+package org.foomo.zugspitze.services.rpc.events
 {
 	import flash.events.ErrorEvent;
 	import flash.events.Event;
-
-	import org.foomo.zugspitze.services.core.rpc.RPCTransport;
 
 	/**
 	 * @link    http://www.foomo.org
@@ -27,45 +25,22 @@ package org.foomo.zugspitze.services.core.rpc.events
 	 * @author  franklin <franklin@weareinteractive.com>
 	 * @author  jan <jan@bestbytes.de>
 	 */
-	public class RPCClientErrorEvent extends ErrorEvent
+	public class RPCTransportErrorEvent extends ErrorEvent
 	{
-		//-----------------------------------------------------------------------------------------
-		// ~ Constants
-		//-----------------------------------------------------------------------------------------
-
-		public static const RPC_TRANSPORT_ERROR:String 	= "rpcTransportError";
-		public static const SECURITY_ERROR:String 		= "securityError";
-		public static const IO_ERROR:String 			= "ioError";
-
 		//-----------------------------------------------------------------------------------------
 		// ~ Variables
 		//-----------------------------------------------------------------------------------------
 
-		/**
-		 *
-		 */
-		private var _transport:RPCTransport;
+		public static const NULL_ERROR:String 	= "nullError";
+		public static const REPLY_ERROR:String 	= "replyError";
 
 		//-----------------------------------------------------------------------------------------
 		// ~ Constructor
 		//-----------------------------------------------------------------------------------------
 
-		public function RPCClientErrorEvent(type:String, transport:RPCTransport, text:String='')
+		public function RPCTransportErrorEvent(type:String, text:String='')
 		{
-			this._transport = transport;
 			super(type, false, false, text);
-		}
-
-		//-----------------------------------------------------------------------------------------
-		// ~ Public methods
-		//-----------------------------------------------------------------------------------------
-
-		/**
-		 * The causing transport
-		 */
-		public function get transport():RPCTransport
-		{
-			return _transport;
 		}
 
 		//-----------------------------------------------------------------------------------------
@@ -77,15 +52,15 @@ package org.foomo.zugspitze.services.core.rpc.events
 		 */
 		override public function clone():Event
 		{
-			return new RPCClientErrorEvent(type, transport, this.text);
+			return new RPCTransportErrorEvent(this.type, this.text);
 		}
 
 		/**
 		 * @inherit
 		 */
-		override public function toString():String
+		public override function toString():String
 		{
-			return formatToString("RPCClientErrorEvent", "transport", "text", "id");
+			return formatToString("RPCTransportEvent", "text", "id");
 		}
 	}
 }

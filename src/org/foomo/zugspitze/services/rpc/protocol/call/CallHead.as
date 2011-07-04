@@ -14,10 +14,12 @@
  * You should have received a copy of the GNU Lesser General Public License along with
  * the foomo Opensource Framework. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.foomo.zugspitze.services.core.rpc.protocol.call
+package org.foomo.zugspitze.services.rpc.protocol.call
 {
+	import org.foomo.zugspitze.services.rpc.protocol.AbstractHead;
+
 	[ExcludeClass]
-	[RemoteClass(alias='Foomo.Services.RPC.Protocol.Call.MethodCall')]
+	[RemoteClass(alias='Foomo.Services.RPC.Protocol.Call.Head')]
 
 	/**
 	 * @link    http://www.foomo.org
@@ -26,23 +28,27 @@ package org.foomo.zugspitze.services.core.rpc.protocol.call
 	 * @author  jan <jan@bestbytes.de>
 	 * @private
 	 */
-	public class MethodCall
+	public class CallHead extends AbstractHead
 	{
 		//-----------------------------------------------------------------------------------------
 		// ~ Variables
 		//-----------------------------------------------------------------------------------------
 
 		/**
-		 * id of the method call
+		 * name of the user
 		 */
-		public var id:String;
+		public var username:String;
 		/**
-		 * name of the method to be called
+		 * password of the user
 		 */
-		public var method:String;
+		public var password:String;
 		/**
-		 * the method call arguments
+		 * name of the class to be called
 		 */
-		public var arguments:Array;
+		public var className:String;
+		/**
+		 * version of the class
+		 */
+		public var classVersion:Number;
 	}
 }

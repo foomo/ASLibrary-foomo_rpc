@@ -14,10 +14,14 @@
  * You should have received a copy of the GNU Lesser General Public License along with
  * the foomo Opensource Framework. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.foomo.zugspitze.services.core.rpc.protocol.reply
+package org.foomo.zugspitze.services.rpc
 {
-	[ExcludeClass]
-	[RemoteClass(alias='Foomo.Services.RPC.Protocol.Reply.MethodReply')]
+	import flash.events.EventDispatcher;
+	import flash.events.ProgressEvent;
+
+	[Event(name="progress", type="flash.events.ProgressEvent")]
+	[Event(name="rpcMethodCallError", type="org.foomo.zugspitze.services.rpc.events.RPCMethodCallEvent")]
+	[Event(name="rpcMethodCallComplete", type="org.foomo.zugspitze.services.rpc.events.RPCMethodCallEvent")]
 
 	/**
 	 * @link    http://www.foomo.org
@@ -26,27 +30,20 @@ package org.foomo.zugspitze.services.core.rpc.protocol.reply
 	 * @author  jan <jan@bestbytes.de>
 	 * @private
 	 */
-	public class MethodReply
+	public class RPCMethodCallToken extends EventDispatcher
 	{
 		//-----------------------------------------------------------------------------------------
 		// ~ Variables
 		//-----------------------------------------------------------------------------------------
 
-		/**
-		 * id of the method call
-		 */
-		public var id:String;
-		/**
-		 * return value
-		 */
-		public var value:*;
-		/**
-		 * messages
-		 */
-		public var messages:Array = [];
-		/**
-		 * server side exception
-		 */
-		public var exception:*;
+		public var methodCallId:String;
+
+		//-----------------------------------------------------------------------------------------
+		// ~ Constructor
+		//-----------------------------------------------------------------------------------------
+
+		public function RPCMethodCallToken()
+		{
+		}
 	}
 }

@@ -14,11 +14,12 @@
  * You should have received a copy of the GNU Lesser General Public License along with
  * the foomo Opensource Framework. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.foomo.zugspitze.services.core.rpc.events
+package org.foomo.zugspitze.services.rpc.events
 {
+	import flash.events.ErrorEvent;
 	import flash.events.Event;
 
-	import org.foomo.zugspitze.services.core.rpc.RPCTransport;
+	import org.foomo.zugspitze.services.rpc.RPCTransport;
 
 	/**
 	 * @link    http://www.foomo.org
@@ -26,15 +27,15 @@ package org.foomo.zugspitze.services.core.rpc.events
 	 * @author  franklin <franklin@weareinteractive.com>
 	 * @author  jan <jan@bestbytes.de>
 	 */
-	public class RPCClientEvent extends Event
+	public class RPCClientErrorEvent extends ErrorEvent
 	{
 		//-----------------------------------------------------------------------------------------
 		// ~ Constants
 		//-----------------------------------------------------------------------------------------
 
-		public static const RPC_TRANSPORT_COMPLETE:String 	= "rpcTransportComplete";
-		public static const RPC_TRANSPORT_PROGRESS:String 	= "rpcTransportProgress";
-		public static const RPC_TRANSPORT_OPEN:String 		= "rpcTransportOpen";
+		public static const RPC_TRANSPORT_ERROR:String 	= "rpcTransportError";
+		public static const SECURITY_ERROR:String 		= "securityError";
+		public static const IO_ERROR:String 			= "ioError";
 
 		//-----------------------------------------------------------------------------------------
 		// ~ Variables
@@ -49,11 +50,10 @@ package org.foomo.zugspitze.services.core.rpc.events
 		// ~ Constructor
 		//-----------------------------------------------------------------------------------------
 
-		public function RPCClientEvent(type:String, transport:RPCTransport)
+		public function RPCClientErrorEvent(type:String, transport:RPCTransport, text:String='')
 		{
 			this._transport = transport;
-
-			super(type);
+			super(type, false, false, text);
 		}
 
 		//-----------------------------------------------------------------------------------------
@@ -61,7 +61,7 @@ package org.foomo.zugspitze.services.core.rpc.events
 		//-----------------------------------------------------------------------------------------
 
 		/**
-		 *
+		 * The causing transport
 		 */
 		public function get transport():RPCTransport
 		{
@@ -77,7 +77,7 @@ package org.foomo.zugspitze.services.core.rpc.events
 		 */
 		override public function clone():Event
 		{
-			return new RPCClientEvent(this.type, this.transport);
+			return new RPCClientErrorEvent(type, transport, this.text);
 		}
 
 		/**
@@ -85,7 +85,7 @@ package org.foomo.zugspitze.services.core.rpc.events
 		 */
 		override public function toString():String
 		{
-			return formatToString("RPCClientEvent", "transport");
+			return formatToString("RPCClientErrorEvent", "transport", "text", "id");
 		}
 	}
 }

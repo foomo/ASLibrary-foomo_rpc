@@ -14,9 +14,9 @@
  * You should have received a copy of the GNU Lesser General Public License along with
  * the foomo Opensource Framework. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.foomo.zugspitze.services.core.rpc.protocol
+package org.foomo.zugspitze.services.rpc.protocol
 {
-	import org.foomo.zugspitze.services.core.rpc.protocol.reply.ReplyHead;
+	import org.foomo.zugspitze.services.rpc.protocol.reply.ReplyHead;
 
 	[ExcludeClass]
 	[RemoteClass(alias='Foomo.Services.RPC.Protocol.Reply')]

@@ -14,10 +14,10 @@
  * You should have received a copy of the GNU Lesser General Public License along with
  * the foomo Opensource Framework. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.foomo.zugspitze.services.core.rpc.events
+package org.foomo.zugspitze.services.rpc.events
 {
-	import org.foomo.zugspitze.services.core.rpc.protocol.call.MethodCall;
-	import org.foomo.zugspitze.services.core.rpc.protocol.reply.MethodReply;
+	import org.foomo.zugspitze.services.rpc.protocol.call.MethodCall;
+	import org.foomo.zugspitze.services.rpc.protocol.reply.MethodReply;
 
 	import flash.events.ErrorEvent;
 	import flash.events.Event;
