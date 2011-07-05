@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU Lesser General Public License along with
  * the foomo Opensource Framework. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.foomo.zugspitze.services.rpc
+package org.foomo.rpc
 {
 	import flash.events.Event;
 	import flash.net.ObjectEncoding;
@@ -23,11 +23,11 @@ package org.foomo.zugspitze.services.rpc
 	import flash.net.URLStream;
 	import flash.utils.ByteArray;
 
-	import org.foomo.zugspitze.services.rpc.events.RPCTransportErrorEvent;
-	import org.foomo.zugspitze.services.rpc.protocol.Reply;
+	import org.foomo.rpc.events.RPCTransportErrorEvent;
+	import org.foomo.rpc.protocol.Reply;
 
-	[Event(name="nullError", type="org.foomo.zugspitze.services.rpc.events.RPCTransportErrorEvent")]
-	[Event(name="replyError", type="org.foomo.zugspitze.services.rpc.events.RPCTransportErrorEvent")]
+	[Event(name="nullError", type="org.foomo.rpc.events.RPCTransportErrorEvent")]
+	[Event(name="replyError", type="org.foomo.rpc.events.RPCTransportErrorEvent")]
 
 	/**
 	 * AMF based flash cient to PHP server communication over HTTP.

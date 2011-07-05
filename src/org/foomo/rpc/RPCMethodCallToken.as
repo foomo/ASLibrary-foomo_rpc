@@ -14,14 +14,14 @@
  * You should have received a copy of the GNU Lesser General Public License along with
  * the foomo Opensource Framework. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.foomo.zugspitze.services.rpc
+package org.foomo.rpc
 {
 	import flash.events.EventDispatcher;
 	import flash.events.ProgressEvent;
 
 	[Event(name="progress", type="flash.events.ProgressEvent")]
-	[Event(name="rpcMethodCallError", type="org.foomo.zugspitze.services.rpc.events.RPCMethodCallEvent")]
-	[Event(name="rpcMethodCallComplete", type="org.foomo.zugspitze.services.rpc.events.RPCMethodCallEvent")]
+	[Event(name="rpcMethodCallError", type="org.foomo.rpc.events.RPCMethodCallEvent")]
+	[Event(name="rpcMethodCallComplete", type="org.foomo.rpc.events.RPCMethodCallEvent")]
 
 	/**
 	 * @link    http://www.foomo.org

@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU Lesser General Public License along with
  * the foomo Opensource Framework. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.foomo.zugspitze.services.rpc.events
+package org.foomo.rpc.events
 {
 	import flash.events.ErrorEvent;
 	import flash.events.Event;

@@ -14,14 +14,12 @@
  * You should have received a copy of the GNU Lesser General Public License along with
  * the foomo Opensource Framework. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.foomo.zugspitze.services.rpc.events
+package org.foomo.rpc.events
 {
-	import org.foomo.zugspitze.services.rpc.protocol.call.MethodCall;
-	import org.foomo.zugspitze.services.rpc.protocol.reply.MethodReply;
-
 	import flash.events.ErrorEvent;
 	import flash.events.Event;
-	import flash.events.SecurityErrorEvent;
+
+	import org.foomo.rpc.RPCTransport;
 
 	/**
 	 * @link    http://www.foomo.org
@@ -29,14 +27,15 @@ package org.foomo.zugspitze.services.rpc.events
 	 * @author  franklin <franklin@weareinteractive.com>
 	 * @author  jan <jan@bestbytes.de>
 	 */
-	public class RPCMethodCallEvent extends Event
+	public class RPCClientErrorEvent extends ErrorEvent
 	{
 		//-----------------------------------------------------------------------------------------
 		// ~ Constants
 		//-----------------------------------------------------------------------------------------
 
-		public static const RPC_METHOD_CALL_COMPLETE:String = 'rpcMethodCallComplete';
-		public static const RPC_METHOD_CALL_ERROR:String 	= 'rpcMethodCallError';
+		public static const RPC_TRANSPORT_ERROR:String 	= "rpcTransportError";
+		public static const SECURITY_ERROR:String 		= "securityError";
+		public static const IO_ERROR:String 			= "ioError";
 
 		//-----------------------------------------------------------------------------------------
 		// ~ Variables
@@ -45,22 +44,28 @@ package org.foomo.zugspitze.services.rpc.events
 		/**
 		 *
 		 */
-		public var methodReply:MethodReply;
-		/**
-		 *
-		 */
-		public var methodCall:MethodCall;
+		private var _transport:RPCTransport;
 
 		//-----------------------------------------------------------------------------------------
 		// ~ Constructor
 		//-----------------------------------------------------------------------------------------
 
-		public function RPCMethodCallEvent(type:String, methodCall:MethodCall, methodReply:MethodReply=null)
+		public function RPCClientErrorEvent(type:String, transport:RPCTransport, text:String='')
 		{
-			this.methodCall	= methodCall;
-			this.methodReply = methodReply;
+			this._transport = transport;
+			super(type, false, false, text);
+		}
 
-			super(type);
+		//-----------------------------------------------------------------------------------------
+		// ~ Public methods
+		//-----------------------------------------------------------------------------------------
+
+		/**
+		 * The causing transport
+		 */
+		public function get transport():RPCTransport
+		{
+			return _transport;
 		}
 
 		//-----------------------------------------------------------------------------------------
@@ -72,15 +77,15 @@ package org.foomo.zugspitze.services.rpc.events
 		 */
 		override public function clone():Event
 		{
-			return new RPCMethodCallEvent(this.type, this.methodCall, this.methodReply);
+			return new RPCClientErrorEvent(type, transport, this.text);
 		}
 
 		/**
 		 * @inherit
 		 */
-		public override function toString():String
+		override public function toString():String
 		{
-			return formatToString("RPCMethodCallEvent");
+			return formatToString("RPCClientErrorEvent", "transport", "text", "id");
 		}
 	}
 }
