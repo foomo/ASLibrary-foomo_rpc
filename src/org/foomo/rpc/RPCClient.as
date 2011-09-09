@@ -22,6 +22,7 @@ package org.foomo.rpc
 	import flash.events.ProgressEvent;
 	import flash.events.SecurityErrorEvent;
 
+	import org.foomo.managers.LogManager;
 	import org.foomo.rpc.events.RPCClientErrorEvent;
 	import org.foomo.rpc.events.RPCClientEvent;
 	import org.foomo.rpc.events.RPCMethodCallEvent;
@@ -31,6 +32,7 @@ package org.foomo.rpc
 	import org.foomo.rpc.protocol.call.CallHead;
 	import org.foomo.rpc.protocol.call.MethodCall;
 	import org.foomo.rpc.protocol.reply.MethodReply;
+	import org.foomo.utils.DebugUtil;
 
 	[Event(name="ioError", type="org.foomo.rpc.events.RPCClientErrorEvent")]
 	[Event(name="securityError", type="org.foomo.rpc.events.RPCClientErrorEvent")]
@@ -149,6 +151,10 @@ package org.foomo.rpc
 		{
 			var transport:RPCTransport = new RPCTransport(this._endPoint);
 			this.addTransportEventListeners(transport);
+			if (LogManager.isDebug()) {
+				DebugUtil.setTimer(transport);
+				LogManager.debug(this, 'Sending RPC Transport call');
+			}
 			transport.send(this.currentCall);
 			this.resetCall();
 			return transport;
@@ -200,6 +206,8 @@ package org.foomo.rpc
 			var transport:RPCTransport = RPCTransport(event.target);
 			this.removeTransportEventListeners(transport);
 
+			if (LogManager.isDebug()) LogManager.debug(this, 'RPC Transport completeafter {0}ms', DebugUtil.getTimer(transport));
+
 			var reply:Reply = transport.reply;
 			var request:Call = Call(transport.data);
 			var requestMethodCalls:Array = new Array;
@@ -224,6 +232,12 @@ package org.foomo.rpc
 		protected function transport_errorHandler(event:Event):void
 		{
 			var transport:RPCTransport = RPCTransport(event.target);
+			if (LogManager.isDebug()) {
+				LogManager.error(this, 'RPC Transport error after {0}ms', DebugUtil.getTimer(transport));
+				DebugUtil.dump(transport.data);
+			} else {
+				LogManager.error(this, 'RPC Transport error');
+			}
 			this.removeTransportEventListeners(transport);
 
 			var failedRequest:Call = Call(transport.data);
