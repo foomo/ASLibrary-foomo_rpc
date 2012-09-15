@@ -7,5 +7,7 @@
 	<name>Foomo RPC Services</name>
 	<description>The foomo RPC Service Library.</description>
 	<exclude>true</exclude>
-	<dependencies/>
+    <dependencies>
+        <id>org.foomo.core</id>
+    </dependencies>
 </config>
